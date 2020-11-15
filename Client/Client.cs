@@ -5,13 +5,23 @@ namespace ClientClassNamespace
 {
     public class ClientClass
     {
-        private string _serverAddress;
-        string _port;
-        public void Connect(string ip)
+        private readonly string _serverAddress;
+        private readonly int _port;
+        private NetworkStream _stream;
+        public ClientClass(string serverAddress, int port)
         {
-                Int32 port = 13000;
-                TcpClient client = new TcpClient(_serverAddress, port);
-                NetworkStream stream = client.GetStream();
+            _port = port;
+            _serverAddress = serverAddress;
+        }
+        public void Connect()
+        {
+            TcpClient client = new TcpClient(_serverAddress, _port);
+            _stream = client.GetStream();
+        }
+        public void SendMessage(string message)
+        {
+            Byte[] data = System.Text.Encoding.ASCII.GetBytes(message);
+            _stream.Write(data, 0, data.Length);
         }
     }
 }
