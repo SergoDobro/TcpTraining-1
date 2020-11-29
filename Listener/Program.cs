@@ -5,11 +5,19 @@ using System.Threading;
 
 namespace Listener
 {
+    //Functions Listener:
+    // Start()
+    // (priv) StartWaitingForConnections() //(priv) StartWaitingForConnections(Func<bool>() conditions)  
+    // (priv) AddNewConnection()
+    // (priv) StopWaitingForConnections()
+    // Stop()
+
     class Program
     {
         static void Main(string[] args)
         {
             #region class Listner part 1
+            #region class Listner Start()
             TcpListener server = null;
             try
             {
@@ -22,6 +30,8 @@ namespace Listener
 
                 // Start listening for client requests.
                 server.Start();
+                 #endregion class Listner Start()
+                 #region class Listner StartWaitingForConnections()
 
                 // Enter the listening loop.
                 while (true)
@@ -33,6 +43,7 @@ namespace Listener
                     TcpClient client = server.AcceptTcpClient();
                     Console.WriteLine("Connected!");
 
+                    #endregion class Listner StartWaitingForConnections()
                     #endregion class Listner part 1
                     
                     #region class User
