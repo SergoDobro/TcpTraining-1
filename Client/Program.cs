@@ -14,14 +14,15 @@ namespace Client
             clientClass.SendMessage("Hello there!");
         }
 
-        // Functions:
-        // Connect()
-        // SendMessage()
-        // StartListening()
-        // + OnMessageReceived
-        // StopListening()
+         // Functions:
+        // Connect() v
+        // SendMessage() v
+        // (priv) StartListening() v
+        // + OnMessageReceived v 
+        // (priv) StopListening() v
         // Disconnect()
 
+        //history 
         static void Connect(String server, String message)
         {
             try
@@ -34,13 +35,13 @@ namespace Client
                 Int32 port = 13000;
                 TcpClient client = new TcpClient(server, port);
 
-
                 // Get a client stream for reading and writing.
                 //  Stream stream = client.GetStream();
 
                 NetworkStream stream = client.GetStream();
-                #endregion
-                #region Send 
+                #endregion Connect
+
+                #region SendMessage
                 // Translate the passed message into ASCII and store it as a Byte array.
                 Byte[] data = System.Text.Encoding.ASCII.GetBytes(message);
 
@@ -48,10 +49,9 @@ namespace Client
                 stream.Write(data, 0, data.Length);
 
                 Console.WriteLine("Sent: {0}", message);
-                #endregion
-                
-                // Receive the TcpServer.response.
+                #endregion SendMessage
 
+                // Receive the TcpServer.response.
                 // Buffer to store the response bytes.
                 data = new Byte[256];
 
@@ -62,7 +62,6 @@ namespace Client
                 Int32 bytes = stream.Read(data, 0, data.Length);
                 responseData = System.Text.Encoding.ASCII.GetString(data, 0, bytes);
                 Console.WriteLine("Received: {0}", responseData);
-                
 
                 // Close everything.
                 stream.Close();
