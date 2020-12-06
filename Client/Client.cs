@@ -1,5 +1,6 @@
 using System;
 using System.Net.Sockets;
+using System.Threading;
 
 namespace ClientClassNamespace
 {
@@ -33,8 +34,9 @@ namespace ClientClassNamespace
                 {
             Byte[] data = System.Text.Encoding.ASCII.GetBytes(message);
             _stream.Write(data, 0, data.Length);
+                    return "sent was successful";
                 }
-                catch ()
+                catch
                 {
                     return "failed to connect";
                 }
