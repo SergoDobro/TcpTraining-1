@@ -6,12 +6,12 @@ using ListenerNamespace;
 
 namespace Listener
 {
-    //Functions Listener:
+    //Functions Listener: V
     // Start() v
-    // (priv) StartWaitingForConnections() //(priv) StartWaitingForConnections(Func<bool>() conditions) v
+    // (priv) StartWaitingForConnections() v
     // (priv) AddNewConnection() v
-    // (priv) StopWaitingForConnections()
-    // Stop()
+    // (priv) StopWaitingForConnections() v
+    // Stop() v
 
     class Program
     {
@@ -19,6 +19,8 @@ namespace Listener
         {
             ListenerNamespace.Listener listener = new ListenerNamespace.Listener();
             listener.Start();
+            Console.ReadLine();
+            listener.Stop();
         }
 
         static void LastMain(string[] args)

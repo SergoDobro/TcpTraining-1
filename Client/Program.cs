@@ -12,6 +12,7 @@ namespace Client
             ClientClass clientClass = new ClientClass("127.0.0.1",13000);
             clientClass.Connect();
             clientClass.SendMessage("Hello there!");
+            //clientClass.SendMessage("Auth: Me");
         }
 
          // Functions:

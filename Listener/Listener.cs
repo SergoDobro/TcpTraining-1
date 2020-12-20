@@ -3,14 +3,15 @@ using System.Net;
 using System.Net.Sockets;
 using ClientClassNamespace;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace ListenerNamespace
 {
     public class Listener
     {
         private TcpListener _server;
+        private bool _isListening;
         private Dictionary<string, ClientClass> _connectedUsers = new Dictionary<string, ClientClass>();
-        
         public void Start()
         {
             int port = 13000;
@@ -21,11 +22,16 @@ namespace ListenerNamespace
         }
         private void StartWaitingForConnections()
         {
-            while (true)
-            {
-                TcpClient client = _server.AcceptTcpClient();
-                AddNewConnection(client);
-            }
+            _isListening = true;
+            Thread thread = new Thread(()=>{
+                while (_isListening)
+                {
+                    TcpClient client = _server.AcceptTcpClient();
+                    AddNewConnection(client);
+                }
+            });
+            thread.Start();
+            
         }
         private void AddNewConnection(TcpClient connection){
             ClientClass user = new ClientClass(connection);
@@ -44,7 +50,20 @@ namespace ListenerNamespace
                 Console.WriteLine(message);
             };
             _connectedUsers.Add(((IPEndPoint)connection.Client.RemoteEndPoint).Address.ToString(),user);
-
+            Console.WriteLine(((IPEndPoint)connection.Client.RemoteEndPoint).Address.ToString());
+            Console.WriteLine(connection.Client.RemoteEndPoint.ToString());
         }
+
+        public void Stop(){
+            StopWaitingForConnections();
+            foreach (var user in _connectedUsers.Values){
+                user.Disconnect();
+            }
+            _server.Stop();
+        }
+        private void StopWaitingForConnections(){
+            _isListening = false;
+        }
+
     }
 }
