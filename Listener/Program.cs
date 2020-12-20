@@ -2,6 +2,7 @@
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
+using ListenerNamespace;
 
 namespace Listener
 {
@@ -14,7 +15,13 @@ namespace Listener
 
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
+        {
+            ListenerNamespace.Listener listener = new ListenerNamespace.Listener();
+            listener.Start();
+        }
+
+        static void LastMain(string[] args)
         {
             #region class Listner part 1
             #region class Listner Start()
