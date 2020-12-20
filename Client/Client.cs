@@ -18,14 +18,16 @@ namespace ClientClassNamespace
             _serverAddress = serverAddress;
             _port = port;
         }
-
+        public ClientClass(TcpClient client)
+        {
+            _client = client;
+        }
         public void Connect()
         {
-            _client = new TcpClient(_serverAddress, _port);
+            _client = _client ?? new TcpClient(_serverAddress, _port);
             _stream = _client.GetStream();
             StartListening();
         }
-
         public string SendMessage(string message)
         {
             if (_stream!=null)//_isListening )

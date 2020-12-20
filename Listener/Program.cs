@@ -7,9 +7,9 @@ using ListenerNamespace;
 namespace Listener
 {
     //Functions Listener:
-    // Start()
-    // (priv) StartWaitingForConnections() //(priv) StartWaitingForConnections(Func<bool>() conditions)  
-    // (priv) AddNewConnection()
+    // Start() v
+    // (priv) StartWaitingForConnections() //(priv) StartWaitingForConnections(Func<bool>() conditions) v
+    // (priv) AddNewConnection() v
     // (priv) StopWaitingForConnections()
     // Stop()
 
